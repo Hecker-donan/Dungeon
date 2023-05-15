@@ -22,7 +22,10 @@ std::map<std::string, std::string> Russian_loc = {
     {"settings", "Настройки"},
     {"lang", "Язык"},
     {"sounds", "Звуки"},
-    {"back", "Назад"}
+    {"back", "Назад"},
+    {"lang_name", "Русский"},
+    {"on", "Включены"},
+    {"off", "Выключены"}
 
 };
 
@@ -31,8 +34,17 @@ std::map<std::string, std::string> English_loc = {
     {"settings", "Settings"},
     {"lang", "Lang"},
     {"sounds", "Sounds"},
-    {"back", "Назад"}
+    {"back", "Back"},
+    {"lang_name", "English"},
+    {"on", "Enabled"},
+    {"disabled", "Disabled"}
 
+
+};
+
+std::map<Languages, std::map<std::string, std::string>> get_loc = {
+    {Russian, Russian_loc},
+    {English, English_loc}
 
 };
 
@@ -131,61 +143,38 @@ void print_c(std::string text) {
 void Settings::print_settings(Settings& settings) {
     std::ios::sync_with_stdio(false);
 
-    if (settings.getLang() == Russian) {
+    std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+
+
         switch (settings.get_chooseds()) {
         case 0:
-            print_c("> " + Russian_loc["lang"] + " - Русский");
+
+            print_c("> " + loc["lang"] + " - " + loc["lang_name"]);
             
 
-            (settings.getSounds()) ? print_c(Russian_loc["sounds"] + " - Включены") : print_c(Russian_loc["sounds"] + " - Выключены");
+            (settings.getSounds()) ? print_c(loc["sounds"] + " - " + loc["on"]) : print_c(loc["sounds"] + " - " + loc["off"]);
 
-            print_c(Russian_loc["back"]);
+            print_c(loc["back"]);
             break;
         case 1:
-            print_c(Russian_loc["lang"] + " - Русский");
+            print_c(loc["lang"] + " - " + loc["lang_name"]);
 
-            (settings.getSounds()) ? print_c("> " + Russian_loc["sounds"] + " - Включены") : print_c("> " + Russian_loc["sounds"] + " - Выключены");
+            (settings.getSounds()) ? print_c("> " + loc["sounds"] + " - " + loc["on"]) : print_c("> " + loc["sounds"] + " - " + loc["off"]);
 
-            print_c(Russian_loc["back"]);
+            print_c(loc["back"]);
             break;
         case 2:
-            print_c(Russian_loc["lang"] + " - Русский");
+            print_c(loc["lang"] + " - " + loc["lang_name"]);
 
 
-            (settings.getSounds()) ? print_c(Russian_loc["sounds"] + " - Включены") : print_c(Russian_loc["sounds"] + " - Выключены");
+            (settings.getSounds()) ? print_c(loc["sounds"] + " - " + loc["on"]) : print_c(loc["sounds"] + " - " + loc["off"]);
 
-            print_c("> " + Russian_loc["back"]);
+            print_c("> " + loc["back"]);
             break;
 
         }
 
 
-    }
-    else {
-        switch (settings.get_chooseds()) {
-        case 0:
-            print_c("> " + English_loc["lang"] + " - English");
-
-            (settings.getSounds()) ? print_c(English_loc["sounds"] + " - Enabled") : print_c(English_loc["sounds"] + " - Disabled");
-
-            print_c(English_loc["back"]);
-            break;
-        case 1:
-            print_c(English_loc["lang"] + " - English");
-
-            (settings.getSounds()) ? print_c("> " + English_loc["sounds"] + " - Enabled") : print_c("> " + English_loc["sounds"] + " - Disabled");
-
-            print_c(English_loc["back"]);
-            break;
-        case 2:
-            print_c(English_loc["lang"] + " - English");
-
-            (settings.getSounds()) ? print_c(English_loc["sounds"] + " - Enabled") : print_c(English_loc["sounds"] + " - Disabled");
-
-            print_c("> " + English_loc["back"]);
-            break;
-
-        }
-    }
+   
 }
 
