@@ -1,15 +1,15 @@
-#include <iostream>
+
 #include <conio.h>
 #include <Windows.h>
 #include "classes.h"
 #include "essentials.h"
 #include <thread>
 
-using namespace std;
+
 
 
 int main() {
-    std::cout.sync_with_stdio(false);
+
 
     // добавляем русский
     setlocale(LC_ALL, "RU");
@@ -64,7 +64,7 @@ int main() {
                 switch (ch) {
 
                 // стрелочка вверх
-                case 72:
+                case ArrowUp:
                     if (choosed == 0) {
                         clear();
                         choosed++;
@@ -117,7 +117,7 @@ int main() {
 
                     break;
                 // стрелочка вниз
-                case 80:
+                case ArrowDown:
                     if (choosed == 0) {
                         clear();
                         choosed++;
@@ -171,7 +171,7 @@ int main() {
                     break;
 
                 // Enter
-                case 13:
+                case Enter:
                     
                     if (choosed == 0) {
 
