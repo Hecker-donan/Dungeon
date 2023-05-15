@@ -51,7 +51,6 @@ int main() {
     }
 
 
-
     // цикл обработки нажатий
     char ch;
     while (true) {
