@@ -7,6 +7,12 @@
 extern std::map<std::string, std::string> Russian_loc;
 extern std::map<std::string, std::string> English_loc;
 
+enum Keys {
+	Enter = 13,
+	ArrowUp = 72,
+	ArrowDown = 80
+};
+
 enum Languages {
 	English,
 	Russian
