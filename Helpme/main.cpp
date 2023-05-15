@@ -103,14 +103,10 @@ int main() {
                         }
                         choosed--;
                         printLogo();
-                        if (settings.getLang() == Russian) {
-                            print_center(Russian_loc["newgame"] + " - [+]");
-                            print_center(Russian_loc["settings"] + " - [ ]");
-                        }
-                        else {
-                            print_center(English_loc["newgame"] + " - [+]");
-                            print_center(English_loc["settings"] + " - [ ]");
-                        }
+                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+
+                        print_center(loc["newgame"] + " - [+]");
+                        print_center(loc["settings"] + " - [ ]");
                         break;
                     }
 
@@ -122,14 +118,10 @@ int main() {
                         clear();
                         choosed++;
                         printLogo();
-                        if (settings.getLang() == Russian) {
-                            print_center(Russian_loc["newgame"] + " - [ ]");
-                            print_center(Russian_loc["settings"] + " - [+]");
-                        }
-                        else {
-                            print_center(English_loc["newgame"] + " - [ ]");
-                            print_center(English_loc["settings"] + " - [+]");
-                        }
+                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        print_center(loc["newgame"] + " - [ ]");
+                        print_center(loc["settings"] + " - [+]");
+
                         break;
                     }
                     else if (choosed == 1) {
@@ -156,14 +148,11 @@ int main() {
                         }
                         choosed--;
                         printLogo();
-                        if (settings.getLang() == Russian) {
-                            print_center(Russian_loc["newgame"] + " - [+]");
-                            print_center(Russian_loc["settings"] + " - [ ]");
-                        }
-                        else {
-                            print_center(English_loc["newgame"] + " - [+]");
-                            print_center(English_loc["settings"] + " - [ ]");
-                        }
+                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        print_center(loc["newgame"] + " - [+]");
+                        print_center(loc["settings"] + " - [ ]");
+
+
                         break;
                     }
 
@@ -224,26 +213,16 @@ int main() {
                                 settings.set_opened(false);
                                 choosed = 0;
 
-                                if (settings.getLang() == Russian) {
-                                    print_center(Russian_loc["newgame"] + " - [+]");
-                                    print_center(Russian_loc["settings"] + " - [ ]");
-                                }
-                                else {
-                                    print_center(English_loc["newgame"] + " - [+]");
-                                    print_center(English_loc["settings"] + " - [ ]");
-                                }
+                                std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+
+                                print_center(loc["newgame"] + " - [+]");
+                                print_center(loc["settings"] + " - [ ]");
                                 break;
                             }
                         }
-                        
-
-
-
                     }
                 }
-            }
-
-            
+            } 
         }
     }
 }
