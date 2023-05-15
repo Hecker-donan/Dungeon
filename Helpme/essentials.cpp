@@ -1,13 +1,13 @@
 #include "essentials.h"
-#include <chrono>   // Для использования std::chrono::milliseconds
-#include <thread>   // Для использования std::this_thread::sleep_for
+#include <chrono>   // Р”Р»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ std::chrono::milliseconds
+#include <thread>   // Р”Р»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ std::this_thread::sleep_for
 #include <filesystem>
 #include <fstream>
 #include <cstdio>
 #include <iostream>
 #include <Windows.h>
 #include <mmsystem.h>
-#pragma comment(lib, "winmm.lib") // необходимо для подключения библиотеки winmm.lib
+#pragma comment(lib, "winmm.lib") // РЅРµРѕР±С…РѕРґРёРјРѕ РґР»СЏ РїРѕРґРєР»СЋС‡РµРЅРёСЏ Р±РёР±Р»РёРѕС‚РµРєРё winmm.lib
 
 using namespace std;
 
@@ -15,7 +15,7 @@ using namespace std;
 
 HANDLE hConsole;
 
-// здесь был асинхронное проигрывания звука на фоне (типа музика)
+// Р·РґРµСЃСЊ Р±С‹Р» Р°СЃРёРЅС…СЂРѕРЅРЅРѕРµ РїСЂРѕРёРіСЂС‹РІР°РЅРёСЏ Р·РІСѓРєР° РЅР° С„РѕРЅРµ (С‚РёРїР° РјСѓР·РёРєР°)
 /*
 thread retry(string soundFile) {
     isPlaying = true;
@@ -47,47 +47,47 @@ void playSound(string soundFile)
 }
 */
 
-// задержка (хз зачем если есть Sleep, но я об этом узнал позже, так что лень удалять)
+// Р·Р°РґРµСЂР¶РєР° (С…Р· Р·Р°С‡РµРј РµСЃР»Рё РµСЃС‚СЊ Sleep, РЅРѕ СЏ РѕР± СЌС‚РѕРј СѓР·РЅР°Р» РїРѕР·Р¶Рµ, С‚Р°Рє С‡С‚Рѕ Р»РµРЅСЊ СѓРґР°Р»СЏС‚СЊ)
 void sleep(int time) {
 	this_thread::sleep_for(chrono::milliseconds(time * 1000));
 }
 
-// установить цвет вывода, но с фоном
+// СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С†РІРµС‚ РІС‹РІРѕРґР°, РЅРѕ СЃ С„РѕРЅРѕРј
 void setcolor(ConsoleColor text, ConsoleColor background) {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, (WORD)((background << 4) | text));
 }
 
-// установить цвет вывода
+// СѓСЃС‚Р°РЅРѕРІРёС‚СЊ С†РІРµС‚ РІС‹РІРѕРґР°
 void setcolor(ConsoleColor color) {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, color);
 }
 
-// сброс цвета вывода
+// СЃР±СЂРѕСЃ С†РІРµС‚Р° РІС‹РІРѕРґР°
 void resetc() {
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, 7 | 0);
 }
 
 
-// возвращает пробелы которые нужны для вывода текста посередине экрана с учетом размеров окна
-string get_center(string text) {
-    int width = 80; // Ширина консоли по умолчанию
+// РІРѕР·РІСЂР°С‰Р°РµС‚ РїСЂРѕР±РµР»С‹ РєРѕС‚РѕСЂС‹Рµ РЅСѓР¶РЅС‹ РґР»СЏ РІС‹РІРѕРґР° С‚РµРєСЃС‚Р° РїРѕСЃРµСЂРµРґРёРЅРµ СЌРєСЂР°РЅР° СЃ СѓС‡РµС‚РѕРј СЂР°Р·РјРµСЂРѕРІ РѕРєРЅР°
+void print_center(string text) {
+    int width = 80; // РЁРёСЂРёРЅР° РєРѕРЅСЃРѕР»Рё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) {
-        width = csbi.srWindow.Right - csbi.srWindow.Left + 1; // Получаем ширину консоли
+        width = csbi.srWindow.Right - csbi.srWindow.Left + 1; // РџРѕР»СѓС‡Р°РµРј С€РёСЂРёРЅСѓ РєРѕРЅСЃРѕР»Рё
     }
-    int padding = (width - text.length()) / 2; // Вычисляем отступ слева
+    int padding = (width - text.length()) / 2; // Р’С‹С‡РёСЃР»СЏРµРј РѕС‚СЃС‚СѓРї СЃР»РµРІР°
     string result;
     for (int i = 0; i < padding; i++) {
-        result += " "; // Добавляем отступ слева в результат
+        result += " "; // Р”РѕР±Р°РІР»СЏРµРј РѕС‚СЃС‚СѓРї СЃР»РµРІР° РІ СЂРµР·СѓР»СЊС‚Р°С‚
     }
-    return result;
+    cout << result << text << endl;
 }
 
 
-// принт побуквенно
+// РїСЂРёРЅС‚ РїРѕР±СѓРєРІРµРЅРЅРѕ
 void printCBC(string text, int delay) {
     for (char c : text) {
         putchar(c);
@@ -95,24 +95,24 @@ void printCBC(string text, int delay) {
     }
 }
 
-// вывод лого игры :)
+// РІС‹РІРѕРґ Р»РѕРіРѕ РёРіСЂС‹ :)
 void printLogo() {
     std::cout.sync_with_stdio(false);
     cout << endl << endl;
 
-    cout << get_center("`7MM\"\"\"Yb.                                                                    ") <<     "`7MM\"\"\"Yb.                                                                    " << endl;
-    cout << get_center("  MM    `Yb.                                                                  ") <<        "  MM    `Yb.                                                                  " << endl;
-    cout << get_center("  MM     `Mb `7MM  `7MM  `7MMpMMMb.   .P\"Ybmmm  .gP\"Ya   ,pW\"Wq.  `7MMpMMMb.  ") <<       "  MM     `Mb `7MM  `7MM  `7MMpMMMb.   .P\"Ybmmm  .gP\"Ya   ,pW\"Wq.  `7MMpMMMb.  " << endl;
-    cout << get_center("  MM      MM   MM    MM    MM    MM  :MI  I8   ,M'   Yb 6W'   `Wb   MM    MM  ") <<        "  MM      MM   MM    MM    MM    MM  :MI  I8   ,M'   Yb 6W'   `Wb   MM    MM  " << endl;
-    cout << get_center("  MM     ,MP   MM    MM    MM    MM   WmmmP\"   8M\"\"\"\"\"\" 8M     M8   MM    MM  ") << "  MM     ,MP   MM    MM    MM    MM   WmmmP\"   8M\"\"\"\"\"\" 8M     M8   MM    MM  " << endl;
-    cout << get_center("  MM    ,dP'   MM    MM    MM    MM  8M        YM.    , YA.   ,A9   MM    MM  ") <<        "  MM    ,dP'   MM    MM    MM    MM  8M        YM.    , YA.   ,A9   MM    MM  " << endl;
-    cout << get_center(".JMMmmmdP'     `Mbod\"YML..JMML  JMML. YMMMMMb   `Mbmmd'  `Ybmd9'  .JMML  JMML.") <<          ".JMMmmmdP'     `Mbod\"YML..JMML  JMML. YMMMMMb   `Mbmmd'  `Ybmd9'  .JMML  JMML." << endl;
-    cout << get_center("                                     6'     dP                                ") <<        "                                     6'     dP                                " << endl;
-    cout << get_center("                                     Ybmmmd'                                  ") <<        "                                     Ybmmmd'                                  " << endl << endl;
-    cout << endl;
+    print_center("`7MM\"\"\"Yb.                                                                    ");
+    print_center("  MM    `Yb.                                                                  ");
+    print_center("  MM     `Mb `7MM  `7MM  `7MMpMMMb.   .P\"Ybmmm  .gP\"Ya   ,pW\"Wq.  `7MMpMMMb.  ");
+    print_center("  MM      MM   MM    MM    MM    MM  :MI  I8   ,M'   Yb 6W'   `Wb   MM    MM  ");
+    print_center("  MM     ,MP   MM    MM    MM    MM   WmmmP\"   8M\"\"\"\"\"\" 8M     M8   MM    MM  ");
+    print_center("  MM    ,dP'   MM    MM    MM    MM  8M        YM.    , YA.   ,A9   MM    MM  ");
+    print_center(".JMMmmmdP'     `Mbod\"YML..JMML  JMML. YMMMMMb   `Mbmmd'  `Ybmd9'  .JMML  JMML.");
+    print_center("                                     6'     dP                                ");
+    print_center("                                     Ybmmmd'                                  ");
+    cout << endl << endl << endl;
 }
 
-// очищает вывод
+// РѕС‡РёС‰Р°РµС‚ РІС‹РІРѕРґ
 void clear() {
     cout << "\033[2J\033[1;1H";
 }
