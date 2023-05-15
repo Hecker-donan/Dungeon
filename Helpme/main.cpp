@@ -19,8 +19,8 @@ int main() {
     setlocale(LC_ALL, "RU");
 
 
-    // дстанавливаем название окна
-    SetConsoleTitle(TEXT("ПОМОГИТЕ МЕНЯ ДЕРЖАТ В ЗАЛОЖНИКАХ"));
+    // устанавливаем название окна
+    SetConsoleTitle(TEXT("Dungeon"));
 
 
     // делаем размер окна неизменяемым
