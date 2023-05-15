@@ -37,7 +37,7 @@ std::map<std::string, std::string> English_loc = {
     {"back", "Back"},
     {"lang_name", "English"},
     {"on", "Enabled"},
-    {"disabled", "Disabled"}
+    {"off", "Disabled"}
 
 
 };

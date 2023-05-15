@@ -34,7 +34,7 @@ int main() {
     Screen screen(menu);
     Settings settings;
 
-
+    std::string choice_menu = "resources/audio/choice.wav";
 
     // первый вывод меню игры
     clear();
@@ -166,6 +166,7 @@ int main() {
 
                         // проверить были открыты настройки или ноу
                         if (settings.is_opened() == false) {
+                            play(choice_menu, settings.getSounds());
                             settings.set_opened(true);
                             settings.set_chooseds(0);
 
@@ -177,6 +178,7 @@ int main() {
                         else {
                             clear();
                             printLogo();
+                            play(choice_menu, settings.getSounds());
                             switch (settings.get_chooseds()) {
                             case 0:
                                 if (settings.getLang() == Russian) {
@@ -197,6 +199,7 @@ int main() {
                                 }
                                 else {
                                     settings.changeSounds(true);
+                                    play(choice_menu, settings.getSounds());
                                     settings.print_settings(settings);
 
                                 }

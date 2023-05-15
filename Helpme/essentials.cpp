@@ -28,24 +28,20 @@ void stopSound()
     isPlaying = false;
     // PlaySound(NULL, NULL, 0);
 }
-
-void playSound(string soundFile)
+*/
+void play(string soundFile, bool sound)
 {
+    if (!sound) return;
     std::wstring wideSoundFile;
     wideSoundFile.resize(soundFile.size());
     MultiByteToWideChar(CP_UTF8, 0, soundFile.c_str(), soundFile.size(), &wideSoundFile[0], soundFile.size());
 
 
-    PlaySound(wideSoundFile.c_str(), NULL, SND_FILENAME | SND_ASYNC | SND_LOOP);
+    PlaySound(wideSoundFile.c_str(), NULL, SND_FILENAME | SND_ASYNC);
 
-
-    while (isPlaying) {
-        Sleep(100);
-    }
-    PlaySound(NULL, NULL, 0);
     
 }
-*/
+
 
 // задержка (хз зачем если есть Sleep, но я об этом узнал позже, так что лень удалять)
 void sleep(int time) {
@@ -114,5 +110,15 @@ void printLogo() {
 
 // очищает вывод
 void clear() {
-    cout << "\033[2J\033[1;1H";
+    //system("cls");
+    // cout << "\033[2J\033[1;1H";
+
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    COORD coord = { 0, 0 };
+    CONSOLE_SCREEN_BUFFER_INFO screenBufferInfo;
+    DWORD charsWritten;
+
+    GetConsoleScreenBufferInfo(hOut, &screenBufferInfo);
+    FillConsoleOutputCharacter(hOut, ' ', screenBufferInfo.dwSize.X * screenBufferInfo.dwSize.Y, coord, &charsWritten);
+    SetConsoleCursorPosition(hOut, coord);
 }

@@ -47,7 +47,7 @@ void printLogo();
 // очищает вывод
 void clear();
 
-//void playSound(std::string soundFile);
+void play(std::string soundFile, bool sound);
 //void stopSound();
 //std::thread retry(std::string soundFile);
 
