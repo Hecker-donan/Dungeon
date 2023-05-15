@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /Helpme/main.cpp
 *.sln
 Helpme/Helpme.vcxproj
+*.cfg

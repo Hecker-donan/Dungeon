@@ -68,7 +68,7 @@ int main() {
                         clear();
                         choosed++;
                         printLogo();
-                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        auto loc = get_loc[settings.getLang()];
                         print_center(loc["newgame"] + " - [ ]");
                         print_center(loc["settings"] + " - [+]");
 
@@ -98,7 +98,7 @@ int main() {
                         }
                         choosed--;
                         printLogo();
-                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        auto loc = get_loc[settings.getLang()];
 
                         print_center(loc["newgame"] + " - [+]");
                         print_center(loc["settings"] + " - [ ]");
@@ -113,7 +113,7 @@ int main() {
                         clear();
                         choosed++;
                         printLogo();
-                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        auto loc = get_loc[settings.getLang()];
                         print_center(loc["newgame"] + " - [ ]");
                         print_center(loc["settings"] + " - [+]");
 
@@ -143,7 +143,7 @@ int main() {
                         }
                         choosed--;
                         printLogo();
-                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        auto loc = get_loc[settings.getLang()];
                         print_center(loc["newgame"] + " - [+]");
                         print_center(loc["settings"] + " - [ ]");
 
@@ -208,7 +208,7 @@ int main() {
                                 settings.set_opened(false);
                                 choosed = 0;
 
-                                std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                                auto loc = get_loc[settings.getLang()];
 
                                 print_center(loc["newgame"] + " - [+]");
                                 print_center(loc["settings"] + " - [ ]");

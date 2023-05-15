@@ -143,7 +143,7 @@ void print_c(std::string text) {
 void Settings::print_settings(Settings& settings) {
     std::ios::sync_with_stdio(false);
 
-    std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+    auto loc = get_loc[settings.getLang()];
 
 
         switch (settings.get_chooseds()) {
