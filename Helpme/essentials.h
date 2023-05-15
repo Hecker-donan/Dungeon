@@ -35,8 +35,8 @@ void setcolor(ConsoleColor color);
 // сброс цвета вывода
 void resetc();
 
-// возвращает пробелы которые нужны для вывода текста посередине экрана с учетом размеров окна
-std::string get_center(std::string text);
+// выводит текст посередине
+void print_center(std::string text);
 
 // принт побуквенно
 void printCBC(std::string text, int delay);

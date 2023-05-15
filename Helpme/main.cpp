@@ -1,26 +1,22 @@
-﻿#include <iostream>
+﻿
 #include <conio.h>
-#include <Windows.h> // Для взаимодействия с окном, цвето и тд
-#include <cstdlib> // Для system()
+#include <Windows.h>
 #include "classes.h"
-#include "essentials.h" // Вспомогательные методы
+#include "essentials.h"
 #include <thread>
 
 
 
 
-using namespace std;
-
-
 int main() {
-    std::cout.sync_with_stdio(false);
+
 
     // добавляем русский
     setlocale(LC_ALL, "RU");
 
 
-    // дстанавливаем название окна
-    SetConsoleTitle(TEXT("ПОМОГИТЕ МЕНЯ ДЕРЖАТ В ЗАЛОЖНИКАХ"));
+    // устанавливаем название окна
+    SetConsoleTitle(TEXT("Dungeon"));
 
 
     // делаем размер окна неизменяемым
@@ -46,12 +42,12 @@ int main() {
     int choosed = 0;
 
     if (settings.getLang() == Russian) {
-        cout << get_center("Новая игра - [+]") << "Новая игра - [+]" << endl;
-        cout << get_center("Настройки - [ ]") << "Настройки - [ ]" << endl;
+        print_center(Russian_loc["newgame"] + " - [+]");
+        print_center(Russian_loc["settings"] + " - [ ]");
     }
     else {
-        cout << get_center("New game - [+]") << "New game - [+]" << endl;
-        cout << get_center("Settings - [ ]") << "Settings - [ ]" << endl;
+        print_center(English_loc["newgame"] + " - [+]");
+        print_center(English_loc["settings"] + " - [ ]");
     }
 
 
@@ -67,40 +63,39 @@ int main() {
             if (screen.getState() == menu) {
                 switch (ch) {
 
-                case 72:
+                // стрелочка вверх
+                case ArrowUp:
                     if (choosed == 0) {
                         clear();
                         choosed++;
                         printLogo();
                         if (settings.getLang() == Russian) {
-                            cout << get_center("Новая игра - [ ]") << "Новая игра - [ ]" << endl;
-                            cout << get_center("Настройки - [+]") << "Настройки - [+]" << endl;
+                            print_center(Russian_loc["newgame"] + " - [ ]");
+                            print_center(Russian_loc["settings"] + " - [+]");
                         }
                         else {
-                            cout << get_center("New game - [ ]") << "New game - [ ]" << endl;
-                            cout << get_center("Settings - [+]") << "Settings - [+]" << endl;
+                            print_center(English_loc["newgame"] + " - [ ]");
+                            print_center(English_loc["settings"] + " - [+]");
                         }
                         break;
                     }
                     if (choosed == 1) {
                         clear();
                         // открыты настройки?
-                        if (settings.is_opened() == true) {
+                        if (settings.is_opened()) {
                             // чек выбор настроек для отображения
+                            printLogo();
                             switch (settings.get_chooseds()) {
                             case 0:
                                 settings.set_chooseds(2);
-                                printLogo();
                                 settings.print_settings(settings);
                                 break;
                             case 1:
                                 settings.set_chooseds(0);
-                                printLogo();
                                 settings.print_settings(settings);
                                 break;
                             case 2:
                                 settings.set_chooseds(1);
-                                printLogo();
                                 settings.print_settings(settings);
                                 break;
                             }
@@ -108,51 +103,42 @@ int main() {
                         }
                         choosed--;
                         printLogo();
-                        if (settings.getLang() == Russian) {
-                            cout << get_center("Новая игра - [+]") << "Новая игра - [+]" << endl;
-                            cout << get_center("Настройки - [ ]") << "Настройки - [ ]" << endl;
-                        }
-                        else {
-                            cout << get_center("New game - [+]") << "New game - [+]" << endl;
-                            cout << get_center("Settings - [ ]") << "Settings - [ ]" << endl;
-                        }
+                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+
+                        print_center(loc["newgame"] + " - [+]");
+                        print_center(loc["settings"] + " - [ ]");
                         break;
                     }
 
 
                     break;
-                case 80:
+                // стрелочка вниз
+                case ArrowDown:
                     if (choosed == 0) {
                         clear();
                         choosed++;
                         printLogo();
-                        if (settings.getLang() == Russian) {
-                            cout << get_center("Новая игра - [ ]") << "Новая игра - [ ]" << endl;
-                            cout << get_center("Настройки - [+]") << "Настройки - [+]" << endl;
-                        }
-                        else {
-                            cout << get_center("New game - [ ]") << "New game - [ ]" << endl;
-                            cout << get_center("Settings - [+]") << "Settings - [+]" << endl;
-                        }
+                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        print_center(loc["newgame"] + " - [ ]");
+                        print_center(loc["settings"] + " - [+]");
+
                         break;
                     }
                     else if (choosed == 1) {
                         clear();
-                        if (settings.is_opened() == true) {
+                        if (settings.is_opened()) {
+                            printLogo();
                             switch (settings.get_chooseds()) {
                             case 0:
                                 settings.set_chooseds(1);
-                                printLogo();
                                 settings.print_settings(settings);
                                 break;
                             case 1:
                                 settings.set_chooseds(2);
-                                printLogo();
                                 settings.print_settings(settings);
                                 break;
                             case 2:
                                 settings.set_chooseds(0);
-                                printLogo();
                                 settings.print_settings(settings);
                                 break;
 
@@ -162,21 +148,19 @@ int main() {
                         }
                         choosed--;
                         printLogo();
-                        if (settings.getLang() == Russian) {
-                            cout << get_center("Новая игра - [+]") << "Новая игра - [+]" << endl;
-                            cout << get_center("Настройки - [ ]") << "Настройки - [ ]" << endl;
-                        }
-                        else {
-                            cout << get_center("New game - [+]") << "New game - [+]" << endl;
-                            cout << get_center("Settings - [ ]") << "Settings - [ ]" << endl;
-                        }
+                        std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+                        print_center(loc["newgame"] + " - [+]");
+                        print_center(loc["settings"] + " - [ ]");
+
+
                         break;
                     }
 
 
                     break;
 
-                case 13:
+                // Enter
+                case Enter:
                     
                     if (choosed == 0) {
 
@@ -190,17 +174,16 @@ int main() {
                             settings.set_opened(true);
                             settings.set_chooseds(0);
 
-                            
                             clear();
                             printLogo();
                             settings.print_settings(settings);
                             break;
                         }
                         else {
+                            clear();
+                            printLogo();
                             switch (settings.get_chooseds()) {
                             case 0:
-                                clear();
-                                printLogo();
                                 if (settings.getLang() == Russian) {
                                     settings.changeLang(English);
                                     settings.print_settings(settings);
@@ -212,61 +195,34 @@ int main() {
                                     break;
                                 }
                             case 1:
-                                clear();
-                                printLogo();
-                                if (settings.getLang() == English) {
-                                    if (settings.getSounds() == true) {
-                                        settings.changeSounds(false);
-                                        settings.print_settings(settings);
+                                if (settings.getSounds()) {
+                                    settings.changeSounds(false);
+                                    settings.print_settings(settings);
 
-                                    }
-                                    else {
-                                        settings.changeSounds(true);
-                                        settings.print_settings(settings);
-
-                                    }
-                                    break;
                                 }
                                 else {
-                                    if (settings.getSounds() == true) {
-                                        settings.changeSounds(false);
-                                        settings.print_settings(settings);
-                                    }
-                                    else {
-                                        settings.changeSounds(true);
-                                        settings.print_settings(settings);
+                                    settings.changeSounds(true);
+                                    settings.print_settings(settings);
 
-                                    }
-
-                                    break;
                                 }
+                                break;
+                                
                             case 2:
-                                clear();
-                                printLogo();
+
                                 settings.updateSettings();
                                 settings.set_opened(false);
                                 choosed = 0;
 
-                                if (settings.getLang() == Russian) {
-                                    cout << get_center("Новая игра - [+]") << "Новая игра - [+]" << endl;
-                                    cout << get_center("Настройки - [ ]") << "Настройки - [ ]" << endl;
-                                }
-                                else {
-                                    cout << get_center("New game - [+]") << "New game - [+]" << endl;
-                                    cout << get_center("Settings - [ ]") << "Settings - [ ]" << endl;
-                                }
+                                std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+
+                                print_center(loc["newgame"] + " - [+]");
+                                print_center(loc["settings"] + " - [ ]");
                                 break;
                             }
                         }
-                        
-
-
-
                     }
                 }
-            }
-
-            
+            } 
         }
     }
 }

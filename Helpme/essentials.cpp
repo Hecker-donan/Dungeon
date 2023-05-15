@@ -72,7 +72,7 @@ void resetc() {
 
 
 // возвращает пробелы которые нужны дл€ вывода текста посередине экрана с учетом размеров окна
-string get_center(string text) {
+void print_center(string text) {
     int width = 80; // Ўирина консоли по умолчанию
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) {
@@ -83,7 +83,7 @@ string get_center(string text) {
     for (int i = 0; i < padding; i++) {
         result += " "; // ƒобавл€ем отступ слева в результат
     }
-    return result;
+    cout << result << text << endl;
 }
 
 
@@ -100,16 +100,16 @@ void printLogo() {
     std::cout.sync_with_stdio(false);
     cout << endl << endl;
 
-    cout << get_center("`7MM\"\"\"Yb.                                                                    ") <<     "`7MM\"\"\"Yb.                                                                    " << endl;
-    cout << get_center("  MM    `Yb.                                                                  ") <<        "  MM    `Yb.                                                                  " << endl;
-    cout << get_center("  MM     `Mb `7MM  `7MM  `7MMpMMMb.   .P\"Ybmmm  .gP\"Ya   ,pW\"Wq.  `7MMpMMMb.  ") <<       "  MM     `Mb `7MM  `7MM  `7MMpMMMb.   .P\"Ybmmm  .gP\"Ya   ,pW\"Wq.  `7MMpMMMb.  " << endl;
-    cout << get_center("  MM      MM   MM    MM    MM    MM  :MI  I8   ,M'   Yb 6W'   `Wb   MM    MM  ") <<        "  MM      MM   MM    MM    MM    MM  :MI  I8   ,M'   Yb 6W'   `Wb   MM    MM  " << endl;
-    cout << get_center("  MM     ,MP   MM    MM    MM    MM   WmmmP\"   8M\"\"\"\"\"\" 8M     M8   MM    MM  ") << "  MM     ,MP   MM    MM    MM    MM   WmmmP\"   8M\"\"\"\"\"\" 8M     M8   MM    MM  " << endl;
-    cout << get_center("  MM    ,dP'   MM    MM    MM    MM  8M        YM.    , YA.   ,A9   MM    MM  ") <<        "  MM    ,dP'   MM    MM    MM    MM  8M        YM.    , YA.   ,A9   MM    MM  " << endl;
-    cout << get_center(".JMMmmmdP'     `Mbod\"YML..JMML  JMML. YMMMMMb   `Mbmmd'  `Ybmd9'  .JMML  JMML.") <<          ".JMMmmmdP'     `Mbod\"YML..JMML  JMML. YMMMMMb   `Mbmmd'  `Ybmd9'  .JMML  JMML." << endl;
-    cout << get_center("                                     6'     dP                                ") <<        "                                     6'     dP                                " << endl;
-    cout << get_center("                                     Ybmmmd'                                  ") <<        "                                     Ybmmmd'                                  " << endl << endl;
-    cout << endl;
+    print_center("`7MM\"\"\"Yb.                                                                    ");
+    print_center("  MM    `Yb.                                                                  ");
+    print_center("  MM     `Mb `7MM  `7MM  `7MMpMMMb.   .P\"Ybmmm  .gP\"Ya   ,pW\"Wq.  `7MMpMMMb.  ");
+    print_center("  MM      MM   MM    MM    MM    MM  :MI  I8   ,M'   Yb 6W'   `Wb   MM    MM  ");
+    print_center("  MM     ,MP   MM    MM    MM    MM   WmmmP\"   8M\"\"\"\"\"\" 8M     M8   MM    MM  ");
+    print_center("  MM    ,dP'   MM    MM    MM    MM  8M        YM.    , YA.   ,A9   MM    MM  ");
+    print_center(".JMMmmmdP'     `Mbod\"YML..JMML  JMML. YMMMMMb   `Mbmmd'  `Ybmd9'  .JMML  JMML.");
+    print_center("                                     6'     dP                                ");
+    print_center("                                     Ybmmmd'                                  ");
+    cout << endl << endl << endl;
 }
 
 // очищает вывод

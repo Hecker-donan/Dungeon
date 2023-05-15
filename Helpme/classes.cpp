@@ -17,7 +17,36 @@ states Screen::getState() {
     return this->state;
 }
 
+std::map<std::string, std::string> Russian_loc = {
+    {"newgame", "Новая игра"},
+    {"settings", "Настройки"},
+    {"lang", "Язык"},
+    {"sounds", "Звуки"},
+    {"back", "Назад"},
+    {"lang_name", "Русский"},
+    {"on", "Включены"},
+    {"off", "Выключены"}
 
+};
+
+std::map<std::string, std::string> English_loc = {
+    {"newgame", "New game"},
+    {"settings", "Settings"},
+    {"lang", "Lang"},
+    {"sounds", "Sounds"},
+    {"back", "Back"},
+    {"lang_name", "English"},
+    {"on", "Enabled"},
+    {"disabled", "Disabled"}
+
+
+};
+
+std::map<Languages, std::map<std::string, std::string>> get_loc = {
+    {Russian, Russian_loc},
+    {English, English_loc}
+
+};
 
 
 // изменить язык игры
@@ -82,7 +111,7 @@ void Settings::updateSettings()
         file << "lang=eng" << std::endl;
     }
 
-    if (this->sounds == true) {
+    if (this->sounds) {
         file << "sounds=true" << std::endl;
     }
     else {
@@ -95,7 +124,7 @@ void Settings::updateSettings()
 }
 
 
-std::string get_centerr(std::string text) {
+void print_c(std::string text) {
     int width = 80; // Ширина консоли по умолчанию
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     if (GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi)) {
@@ -106,96 +135,46 @@ std::string get_centerr(std::string text) {
     for (int i = 0; i < padding; i++) {
         result += " "; // Добавляем отступ слева в результат
     }
-    return result;
+    std::cout << result << text << std::endl;
 }
+
 
 // выводит настройки для главного меню в зависимости от самих настроек
 void Settings::print_settings(Settings& settings) {
     std::ios::sync_with_stdio(false);
 
-    if (settings.getLang() == Russian) {
+    std::map<std::string, std::string> loc = get_loc[settings.getLang()];
+
+
         switch (settings.get_chooseds()) {
         case 0:
-            std::cout << get_centerr(">Язык - Русский") << ">Язык - Русский" << std::endl;
-            if (settings.getSounds() == true) {
-                std::cout << get_centerr("Звуки - Включены") << "Звуки - Включены" << std::endl;
 
-            }
-            else {
-                std::cout << get_centerr("Звуки - Выключены") << "Звуки - Выключены" << std::endl;
+            print_c("> " + loc["lang"] + " - " + loc["lang_name"]);
+            
 
-            }
+            (settings.getSounds()) ? print_c(loc["sounds"] + " - " + loc["on"]) : print_c(loc["sounds"] + " - " + loc["off"]);
 
-            std::cout << get_centerr("Назад") << "Назад" << std::endl;
+            print_c(loc["back"]);
             break;
         case 1:
-            std::cout << get_centerr("Язык - Русский") << "Язык - Русский" << std::endl;
-            if (settings.getSounds() == true) {
-                std::cout << get_centerr(">Звуки - Включены") << ">Звуки - Включены" << std::endl;
+            print_c(loc["lang"] + " - " + loc["lang_name"]);
 
-            }
-            else {
-                std::cout << get_centerr(">Звуки - Выключены") << ">Звуки - Выключены" << std::endl;
+            (settings.getSounds()) ? print_c("> " + loc["sounds"] + " - " + loc["on"]) : print_c("> " + loc["sounds"] + " - " + loc["off"]);
 
-            }
-
-            std::cout << get_centerr("Назад") << "Назад" << std::endl;
+            print_c(loc["back"]);
             break;
         case 2:
-            std::cout << get_centerr("Язык - Русский") << "Язык - Русский" << std::endl;
-            if (settings.getSounds() == true) {
-                std::cout << get_centerr("Звуки - Включены") << "Звуки - Включены" << std::endl;
+            print_c(loc["lang"] + " - " + loc["lang_name"]);
 
-            }
-            else {
-                std::cout << get_centerr("Звуки - Выключены") << "Звуки - Выключены" << std::endl;
 
-            }
+            (settings.getSounds()) ? print_c(loc["sounds"] + " - " + loc["on"]) : print_c(loc["sounds"] + " - " + loc["off"]);
 
-            std::cout << get_centerr(">Назад") << ">Назад" << std::endl;
+            print_c("> " + loc["back"]);
+            break;
+
         }
 
 
-    }
-    else {
-        switch (settings.get_chooseds()) {
-        case 0:
-            std::cout << get_centerr(">Lang - English") << ">Lang - English" << std::endl;
-            if (settings.getSounds() == true) {
-                std::cout << get_centerr("Sounds - Enabled") << "Sounds - Enabled" << std::endl;
-
-            }
-            else {
-                std::cout << get_centerr("Sounds - Disabled") << "Sounds - Disabled" << std::endl;
-
-            }
-            std::cout << get_centerr("Back") << "Back" << std::endl;
-            break;
-        case 1:
-            std::cout << get_centerr("Lang - English") << "Lang - English" << std::endl;
-            if (settings.getSounds() == true) {
-                std::cout << get_centerr(">Sounds - Enabled") << ">Sounds - Enabled" << std::endl;
-
-            }
-            else {
-                std::cout << get_centerr(">Sounds - Disabled") << ">Sounds - Disabled" << std::endl;
-
-            }
-            std::cout << get_centerr("Back") << "Back" << std::endl;
-            break;
-        case 2:
-            std::cout << get_centerr("Lang - English") << "Lang - English" << std::endl;
-            if (settings.getSounds() == true) {
-                std::cout << get_centerr("Sounds - Enabled") << "Sounds - Enabled" << std::endl;
-
-            }
-            else {
-                std::cout << get_centerr("Sounds - Disabled") << "Sounds - Disabled" << std::endl;
-
-            }
-            std::cout << get_centerr(">Back") << ">Back" << std::endl;
-            break;
-        }
-    }
+   
 }
 

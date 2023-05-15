@@ -24,6 +24,7 @@
     <ProjectGuid>{1b6e383a-28a3-41ff-89f0-7c8fba1350e8}</ProjectGuid>
     <RootNamespace>Helpme</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Dungeon</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

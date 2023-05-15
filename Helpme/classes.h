@@ -2,7 +2,17 @@
 #include <filesystem>
 #include <fstream>
 #include <cstdio>
+#include <map>
 
+extern std::map<std::string, std::string> Russian_loc;
+extern std::map<std::string, std::string> English_loc;
+
+
+enum Keys {
+	Enter = 13,
+	ArrowUp = 72,
+	ArrowDown = 80
+};
 
 enum Languages {
 	English,
@@ -15,6 +25,8 @@ enum states {
 	menu,
 	fight
 };
+
+extern std::map<Languages, std::map<std::string, std::string>> get_loc;
 
 // работа с состоянием экрана
 class Screen {
