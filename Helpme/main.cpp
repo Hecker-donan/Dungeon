@@ -30,7 +30,6 @@ int main() {
 
 
     // определение классов (хз, не играл)
-
     Screen screen(menu);
     Settings settings;
 
