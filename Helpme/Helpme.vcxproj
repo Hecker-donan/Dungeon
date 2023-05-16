@@ -159,12 +159,6 @@
     <ClInclude Include="classes.h" />
     <ClInclude Include="essentials.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Media Include="resources\audio\choice.wav">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
-      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</DeploymentContent>
-    </Media>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\libiconv.lib.1.16.0.6\build\native\libiconv.lib.targets" Condition="Exists('..\packages\libiconv.lib.1.16.0.6\build\native\libiconv.lib.targets')" />

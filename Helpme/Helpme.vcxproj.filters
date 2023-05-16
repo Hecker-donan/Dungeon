@@ -36,9 +36,4 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
-  <ItemGroup>
-    <Media Include="resources\audio\choice.wav">
-      <Filter>Файлы ресурсов</Filter>
-    </Media>
-  </ItemGroup>
 </Project>

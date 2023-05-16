@@ -32,9 +32,6 @@ int main() {
     // определение классов (хз, не играл)
     Screen screen(menu);
     Settings settings;
-
-    std::string choice_menu = "resources/audio/choice.wav";
-
     // первый вывод меню игры
     clear();
     printLogo();
@@ -163,9 +160,9 @@ int main() {
                     // при нажатии на энтер при выборе настроек в гл. меню
                     else if (choosed == 1) {
 
-                        // проверить были открыты настройки или ноу
+                        // проверить были открыты настройки или нет
                         if (settings.is_opened() == false) {
-                            play(choice_menu, settings.getSounds());
+                            play(Sounds["choice"], settings.getSounds());
                             settings.set_opened(true);
                             settings.set_chooseds(0);
 
@@ -177,7 +174,7 @@ int main() {
                         else {
                             clear();
                             printLogo();
-                            play(choice_menu, settings.getSounds());
+                            play(Sounds["choice"], settings.getSounds());
                             switch (settings.get_chooseds()) {
                             case 0:
                                 if (settings.getLang() == Russian) {
@@ -198,10 +195,10 @@ int main() {
                                 }
                                 else {
                                     settings.changeSounds(true);
-                                    play(choice_menu, settings.getSounds());
                                     settings.print_settings(settings);
 
                                 }
+                                play(Sounds["choice"], settings.getSounds());
                                 break;
                                 
                             case 2:
@@ -220,6 +217,11 @@ int main() {
                     }
                 }
             } 
+
+            // если щас игрок играется
+            else if (screen.getState() == walk) {
+
+            }
         }
     }
 }

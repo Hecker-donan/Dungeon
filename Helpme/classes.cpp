@@ -5,6 +5,21 @@
 
 
 
+Player::Player(Room room, int x, int y) {
+    this->x = x;
+    this->y = y;
+    this->room = room;
+}
+
+Room::Room() {
+
+}
+
+Room::Room(int number, Player player) {
+    this->number = number;
+
+}
+
 Screen::Screen(states state) {
     this->state = state;
 }
@@ -39,6 +54,11 @@ std::map<std::string, std::string> English_loc = {
     {"on", "Enabled"},
     {"off", "Disabled"}
 
+
+};
+
+std::map<std::string, std::string> Sounds = {
+    {"choice", "resources/audio/choice.wav"},
 
 };
 
@@ -149,7 +169,7 @@ void Settings::print_settings(Settings& settings) {
         switch (settings.get_chooseds()) {
         case 0:
 
-            print_c("> " + loc["lang"] + " - " + loc["lang_name"]);
+            print_c("-> " + loc["lang"] + " - " + loc["lang_name"] + " <-");
             
 
             (settings.getSounds()) ? print_c(loc["sounds"] + " - " + loc["on"]) : print_c(loc["sounds"] + " - " + loc["off"]);
@@ -159,7 +179,7 @@ void Settings::print_settings(Settings& settings) {
         case 1:
             print_c(loc["lang"] + " - " + loc["lang_name"]);
 
-            (settings.getSounds()) ? print_c("> " + loc["sounds"] + " - " + loc["on"]) : print_c("> " + loc["sounds"] + " - " + loc["off"]);
+            (settings.getSounds()) ? print_c("-> " + loc["sounds"] + " - " + loc["on"] + " <-") : print_c("-> " + loc["sounds"] + " - " + loc["off"] + " <-");
 
             print_c(loc["back"]);
             break;
@@ -169,7 +189,7 @@ void Settings::print_settings(Settings& settings) {
 
             (settings.getSounds()) ? print_c(loc["sounds"] + " - " + loc["on"]) : print_c(loc["sounds"] + " - " + loc["off"]);
 
-            print_c("> " + loc["back"]);
+            print_c("-> " + loc["back"] + " <-");
             break;
 
         }
@@ -177,4 +197,5 @@ void Settings::print_settings(Settings& settings) {
 
    
 }
+
 

@@ -6,12 +6,15 @@
 
 extern std::map<std::string, std::string> Russian_loc;
 extern std::map<std::string, std::string> English_loc;
+extern std::map<std::string, std::string> Sounds;
 
 
 enum Keys {
 	Enter = 13,
 	ArrowUp = 72,
-	ArrowDown = 80
+	ArrowDown = 80,
+	ArrowLeft = 75,
+	ArrowRight = 77
 };
 
 enum Languages {
@@ -34,6 +37,8 @@ private:
 	states state;
 public:
 	Screen(states state);
+
+
 	void changeState(states state);
 	states getState();
 };
@@ -161,3 +166,72 @@ public:
 };
 
 
+class Player;
+//комната
+class Room {
+private:
+	// порядковый номер комнаты
+	int number;
+
+	// ширина высота комнаты
+	int height = 60;
+	int weight = 60;
+
+	// двери в каждой из сторон
+	bool UpDoor, LeftDoor, RightDoor, DownDoor;
+
+
+
+public:
+	Room();
+	Room(int number, Player player);
+
+};
+
+//игрок
+class Player {
+private:
+	bool started = false;
+	int hp = 100;
+	Room room;
+	int x, y;
+
+public:
+	Player(Room room, int x, int y);
+
+	bool getStarted();
+	bool setStarted();
+
+
+	int getHP();
+
+
+	int getX();
+	int getY();
+
+	void setX();
+	void setY();
+
+
+	void moveUp();
+	void moveRight();
+	void moveLeft();
+	void moveDown();
+
+
+	Room getRoom();
+};
+
+
+// работа с игрой
+class Game {
+private:
+	bool started = false;
+	Player player;
+
+public:
+	Game();
+
+
+	Player getPlayer();
+};
